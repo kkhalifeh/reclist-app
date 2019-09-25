@@ -40,6 +40,17 @@ ExploreScreen.navigationOptions = (navData) => {
           }}
         />
       </HeaderButtons>
+    ),
+    headerLeft: (
+      <HeaderButtons HeaderButtonComponent={HeaderButton}>
+        <Item
+          title="Menu"
+          iconName="ios-menu"
+          onPress={() => {
+            console.log('here')
+          }}
+        />
+      </HeaderButtons>
     )
   };
 }

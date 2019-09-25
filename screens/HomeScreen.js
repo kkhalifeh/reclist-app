@@ -1,10 +1,32 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { HeaderButtons, Item } from 'react-navigation-header-buttons';
 import HeaderButton from '../components/HeaderButton';
-import { Container, Header, Content, Button, Text } from 'native-base';
+import { Container, Content, Button, Text } from 'native-base';
+
+
 
 const HomeScreen = (props) => {
+
+  const [cityData, setcityData] = useState([])
+
   const { navigation } = props;
+
+  console.log(cityData)
+
+
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const cities = await (
+        fetch("http://localhost:5000/locations_filter")
+          .then(res => console.log(res.json()))
+      )
+    }
+    fetchData()
+  }, [])
+
+  console.log(cityData)
+
   return (
     <Container>
       <Content>

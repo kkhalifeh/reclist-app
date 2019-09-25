@@ -12,6 +12,7 @@ import MyMapScreen from '../screens/MyMapScreen'
 import MyListScreen from '../screens/MyListScreen'
 import { Ionicons } from '@expo/vector-icons';
 import ExploreScreen from '../screens/ExploreScreen'
+import CreateListScreen from '../screens/CreateListScreen';
 
 const defaultStackOptions = {
   defaultNavigationOptions: {
@@ -56,6 +57,12 @@ const ProfileNavigator = createStackNavigator({
 
 }, defaultStackOptions)
 
+const NewListNavigator = createStackNavigator({
+  NewList: {
+    screen: CreateListScreen
+  }
+}, defaultStackOptions)
+
 const tabScreenConfig = {
   Home: {
     screen: HomeNavigator,
@@ -63,6 +70,16 @@ const tabScreenConfig = {
       tabBarIcon: tabInfo => {
         return (
           <Ionicons name="ios-home" size={25} color={tabInfo.tintColor} />
+        );
+      }
+    }
+  },
+  NewList: {
+    screen: NewListNavigator,
+    navigationOptions: {
+      tabBarIcon: tabInfo => {
+        return (
+          <Ionicons name="ios-list-box" size={25} color={tabInfo.tintColor} />
         );
       }
     }
