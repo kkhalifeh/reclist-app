@@ -3,6 +3,7 @@ import { Container, Text } from 'native-base';
 import { AppLoading } from 'expo';
 import * as Font from 'expo-font';
 import { Ionicons } from '@expo/vector-icons';
+import ReclistNavigator from './navigation/ReclistNavigator';
 
 const fetchFonts = () => {
   return Font.loadAsync({
@@ -26,11 +27,7 @@ export default function App() {
     );
   }
   return (
-    <Container>
-      <Text>
-        Reclist
-      </Text>
-    </Container>
+    <ReclistNavigator />
   );
 }
 
