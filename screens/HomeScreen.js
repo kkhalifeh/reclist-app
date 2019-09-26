@@ -3,7 +3,7 @@ import { HeaderButtons, Item } from 'react-navigation-header-buttons';
 import HeaderButton from '../components/HeaderButton';
 import { Container, Content, Button, Text } from 'native-base';
 import axios from 'axios';
-
+import CityList from '../components/CityList';
 
 
 const HomeScreen = (props) => {
@@ -11,7 +11,6 @@ const HomeScreen = (props) => {
   const [cityData, setcityData] = useState([])
 
   const { navigation } = props;
-
 
   useEffect(() => {
     const fetchData = async () => {
@@ -28,21 +27,12 @@ const HomeScreen = (props) => {
   }, [])
   // This needs to run once the home page loads, and only get the cities that have lists on them
 
+  console.log(cityData)
+
   return (
     <Container>
       <Content>
-        <Button block dark
-          onPress={() => {
-            navigation.navigate({
-              routeName: 'CitySelect',
-              params: {
-                cityId: '55',
-                cityName: 'London'
-              }
-            })
-          }}>
-          <Text>Click Me!</Text>
-        </Button>
+        {cityData.length > 0 ? <CityList listData={cityData} navigation={props.navigation} /> : <Text>Loading</Text>}
       </Content>
     </Container>
   )
