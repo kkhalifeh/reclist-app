@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { HeaderButtons, Item } from 'react-navigation-header-buttons';
 import HeaderButton from '../components/HeaderButton';
 import { Container, Content, Button, Text } from 'native-base';
+import axios from 'axios';
 
 
 
@@ -11,21 +12,21 @@ const HomeScreen = (props) => {
 
   const { navigation } = props;
 
-  console.log(cityData)
-
-
 
   useEffect(() => {
     const fetchData = async () => {
-      const cities = await (
-        fetch("http://localhost:5000/locations_filter")
-          .then(res => console.log(res.json()))
-      )
+      axios.get('http://localhost:4000/locations')
+        .then(response => {
+          console.log('useEffect data loaded')
+          setcityData(response.data)
+        })
+        .catch(error => {
+          console.log(error);
+        });
     }
     fetchData()
   }, [])
-
-  console.log(cityData)
+  // This needs to run once the home page loads, and only get the cities that have lists on them
 
   return (
     <Container>
@@ -56,7 +57,7 @@ HomeScreen.navigationOptions = (navData) => {
           title="Menu"
           iconName="ios-menu"
           onPress={() => {
-            console.log('here')
+            console.log('drawer')
           }}
         />
       </HeaderButtons>
