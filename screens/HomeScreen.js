@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { HeaderButtons, Item } from 'react-navigation-header-buttons';
 import HeaderButton from '../components/HeaderButton';
-import { Container, Content, Button, Text } from 'native-base';
+import { Container, Content, Spinner, Text } from 'native-base';
 import axios from 'axios';
 import CityList from '../components/CityList';
 
@@ -14,7 +14,13 @@ const HomeScreen = (props) => {
 
   useEffect(() => {
     const fetchData = async () => {
-      axios.get('http://localhost:4000/locations')
+      axios.get('https://9e2f7bfe.ngrok.io/locations',
+        {
+          headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json; charset=UTF-8',
+          },
+        })
         .then(response => {
           console.log('useEffect data loaded')
           setcityData(response.data)
@@ -27,12 +33,12 @@ const HomeScreen = (props) => {
   }, [])
   // This needs to run once the home page loads, and only get the cities that have lists on them
 
-  console.log(cityData)
+  // console.log(cityData)
 
   return (
     <Container>
       <Content>
-        {cityData.length > 0 ? <CityList listData={cityData} navigation={props.navigation} /> : <Text>Loading</Text>}
+        {cityData.length > 0 ? <CityList listData={cityData} navigation={props.navigation} /> : <Spinner color='black' />}
       </Content>
     </Container>
   )

@@ -27,7 +27,7 @@ const CityList = (props) => {
     <View style={styles.screen}>
       <FlatList
         data={props.listData}
-        keyExtractor={(item, index) => item.id}
+        keyExtractor={(item, index) => item.id.toString()}
         renderItem={renderItem}
         style={{ width: '100%' }} />
     </View>
