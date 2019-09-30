@@ -4,7 +4,7 @@ import HomeScreen from '../screens/HomeScreen'
 import CityListScreen from '../screens/CityListScreen'
 import MyProfileScreen from '../screens/MyProfileScreen'
 import UserListScreen from '../screens/UserListScreen'
-import { createAppContainer } from 'react-navigation'
+import { createAppContainer, createSwitchNavigator } from 'react-navigation'
 import { createBottomTabNavigator } from 'react-navigation-tabs'
 import { createMaterialBottomTabNavigator } from 'react-navigation-material-bottom-tabs'
 import { Platform } from '@unimodules/core'
@@ -13,6 +13,7 @@ import MyListScreen from '../screens/MyListScreen'
 import { Ionicons } from '@expo/vector-icons';
 import ExploreScreen from '../screens/ExploreScreen'
 import CreateListScreen from '../screens/CreateListScreen';
+import AuthScreen from '../screens/AuthScreen'
 
 const defaultStackOptions = {
   defaultNavigationOptions: {
@@ -114,6 +115,14 @@ const ListTabNavigator = Platform.OS === 'android' ? createMaterialBottomTabNavi
   }
 })
 
+const AuthNavigator = createStackNavigator({
+  Auth: AuthScreen
+})
+
+const MainNavigator = createSwitchNavigator({
+  Auth: AuthNavigator,
+  List: ListTabNavigator
+})
 
 
 export default createAppContainer(ListTabNavigator)
